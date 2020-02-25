@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 /**
+ * Se encarga de la comunicacion con el servidor
  *
  * @author nikof
  */

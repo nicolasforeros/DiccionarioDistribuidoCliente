@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Usuario del diccionario, que puede consultar sus terminos y hacer gestion de
+ * estos
  *
  * @author nikof
  */

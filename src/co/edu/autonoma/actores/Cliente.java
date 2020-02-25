@@ -9,6 +9,7 @@ import co.edu.autonoma.redes.RedCliente;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,9 @@ public class Cliente {
         
         try {
             respuesta = new String(this.red.trabajar(mensaje.getBytes()));
-        } catch (IOException ex) {
+        } catch (SocketTimeoutException ex) {
+            return "Error agregando el nuevo termino, problemas de conexion";
+        }catch (IOException ex) {
             return "Error agregando el nuevo termino, problemas de conexion";
         }
         
@@ -58,6 +61,8 @@ public class Cliente {
         
         try {
             respuesta = new String(this.red.trabajar(mensaje.getBytes()));
+        }catch (SocketTimeoutException ex) {
+            return "Error en la consulta, problemas de conexion";
         } catch (IOException ex) {
             return "Error en la consulta, problemas de conexion";
         }
@@ -80,7 +85,9 @@ public class Cliente {
         
         try {
             respuesta = new String(this.red.trabajar(mensaje.getBytes()));
-        } catch (IOException ex) {
+        } catch (SocketTimeoutException ex) {
+            return "Error editando, problemas de conexion";
+        }catch (IOException ex) {
             return "Error editando el termino, problemas de conexion";
         }
         
@@ -100,6 +107,8 @@ public class Cliente {
         
         try {
             respuesta = new String(this.red.trabajar(mensaje.getBytes()));
+        }catch (SocketTimeoutException ex) {
+            return "Error eliminando el termino, problemas de conexion";
         } catch (IOException ex) {
             return "Error eliminando el termino, problemas de conexion";
         }
@@ -121,6 +130,8 @@ public class Cliente {
         
         try {
             respuesta = new String(this.red.trabajar(mensaje.getBytes()));
+        }catch (SocketTimeoutException ex) {
+            return "Error obteniendo la lista, problemas de conexion";
         } catch (IOException ex) {
             return "Error obteniendo lista de terminos, problemas de conexion";
         }

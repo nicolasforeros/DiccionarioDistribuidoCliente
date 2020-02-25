@@ -10,6 +10,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 
 /**
  * Se encarga de la comunicacion con el servidor
@@ -27,13 +28,14 @@ public class RedCliente {
         this.puerto = puerto;
         
         socket = new DatagramSocket();
+        socket.setSoTimeout(10000);
     }
         
     public void desactivar(){
         socket.close();
     }
     
-    public byte[] trabajar(byte[] mensaje) throws IOException{
+    public byte[] trabajar(byte[] mensaje) throws IOException, SocketTimeoutException{
         enviarMensaje(mensaje);
         return recibirMensaje();
     }
@@ -46,7 +48,7 @@ public class RedCliente {
         socket.send(sobre);
     }
     
-    public byte[] recibirMensaje() throws IOException{
+    public byte[] recibirMensaje() throws IOException, SocketTimeoutException{
         byte[] hoja = new byte[1000];		
 
         DatagramPacket sobre = new DatagramPacket(hoja, hoja.length);		
